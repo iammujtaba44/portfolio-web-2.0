@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import ThemeToggle from "../ThemeToggle";
 
 export default function Navigation() {
@@ -11,9 +12,15 @@ export default function Navigation() {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="font-heading text-xl font-bold gradient-text"
+            className="flex items-center space-x-3"
           >
-            Muhammad Mujtaba
+            <Image
+              src="/icon.png"
+              alt="Muhammad Mujtaba"
+              width={120}
+              height={120}
+              className="rounded-full"
+            />
           </motion.div>
           <div className="flex items-center space-x-4">
             <a
