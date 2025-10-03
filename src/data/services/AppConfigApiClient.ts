@@ -1,10 +1,5 @@
 import { ApiService, apiService } from "./ApiService";
-import {
-  AppConfigsResponse,
-  AppConfig,
-  Stats,
-  Bio,
-} from "@/domain/entities/AppConfig";
+import { AppConfigsResponse, Stats, Bio } from "@/domain/entities/AppConfig";
 
 export class AppConfigApiClient {
   private apiService: ApiService;

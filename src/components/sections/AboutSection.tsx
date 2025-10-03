@@ -2,10 +2,9 @@
 
 import { useAppConfigs } from "@/hooks/useAppConfigs";
 import { motion } from "framer-motion";
-import { MapPin, Calendar } from "lucide-react";
 
 export default function AboutSection() {
-  const { stats, bio, loading, error } = useAppConfigs();
+  const { bio } = useAppConfigs();
 
   return (
     <section id="about" className="py-20 bg-white dark:bg-gray-800">

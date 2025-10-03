@@ -30,7 +30,7 @@ export class ApiService {
     }
   }
 
-  async post<T>(endpoint: string, data: any): Promise<T> {
+  async post<T>(endpoint: string, data: unknown): Promise<T> {
     try {
       const response = await fetch(`${this.baseUrl}${endpoint}`, {
         method: "POST",

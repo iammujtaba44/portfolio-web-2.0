@@ -23,10 +23,10 @@ export default function ContactSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-heading font-bold gradient-text mb-4">
-            Let's Connect
+            Let&apos;s Connect
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300">
-            Ready to work together? Let's discuss your next project!
+            Ready to work together? Let&apos;s discuss your next project!
           </p>
         </motion.div>
 

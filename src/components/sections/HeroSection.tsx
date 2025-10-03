@@ -11,6 +11,7 @@ import {
   Code,
 } from "lucide-react";
 import { useAppConfigs } from "@/hooks/useAppConfigs";
+import Image from "next/image";
 
 export default function HeroSection() {
   const { stats, bio, loading, error } = useAppConfigs();
@@ -221,10 +222,11 @@ export default function HeroSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent"></div>
 
                 {/* Profile Image */}
-                <img
+                <Image
                   src="/profile.png"
                   alt="Muhammad Mujtaba - Senior Flutter Engineer"
-                  className="w-full h-full object-cover object-center"
+                  fill
+                  className="object-cover object-center"
                 />
               </div>
 

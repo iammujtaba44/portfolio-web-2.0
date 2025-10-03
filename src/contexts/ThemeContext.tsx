@@ -15,12 +15,10 @@ const themeService = new ThemeService();
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     themeService.initializeTheme();
     setTheme(themeService.getTheme());
-    setMounted(themeService.isMounted());
   }, []);
 
   const toggleTheme = () => {

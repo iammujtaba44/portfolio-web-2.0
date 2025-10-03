@@ -4,12 +4,13 @@ import { motion } from "framer-motion";
 import { useParams, useRouter } from "next/navigation";
 import { useExperience } from "../../../hooks/useExperience";
 import { useEffect, useState } from "react";
+import { Experience } from "../../../domain/entities/Experience";
 
 export default function ExperienceDetailPage() {
   const params = useParams();
   const router = useRouter();
   const { experiences, isLoading, error } = useExperience();
-  const [experience, setExperience] = useState<any>(null);
+  const [experience, setExperience] = useState<Experience | null>(null);
 
   useEffect(() => {
     if (experiences.length > 0 && params.id) {

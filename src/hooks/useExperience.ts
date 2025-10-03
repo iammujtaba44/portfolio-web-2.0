@@ -28,7 +28,7 @@ export function useExperience() {
 
   const currentExperience = useMemo(
     () => experienceRepository.getCurrentExperience(),
-    [experiences]
+    []
   );
 
   const getExperiencesByCompany = (company: string): Experience[] => {
