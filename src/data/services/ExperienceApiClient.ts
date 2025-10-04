@@ -1,26 +1,16 @@
 import { ApiExperiencesResponse } from "../../domain/entities/Experience";
+import { ApiService, apiService } from "./ApiService";
 
 export class ExperienceApiClient {
+  private apiService: ApiService;
+
+  constructor(apiService: ApiService) {
+    this.apiService = apiService;
+  }
+
   async getExperiences(): Promise<ApiExperiencesResponse> {
-    try {
-      const response = await fetch("/api/experiences", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("API Error for /api/experiences:", error);
-      throw error;
-    }
+    return this.apiService.get<ApiExperiencesResponse>("/experiences");
   }
 }
 
-export const experienceApiClient = new ExperienceApiClient();
+export const experienceApiClient = new ExperienceApiClient(apiService);

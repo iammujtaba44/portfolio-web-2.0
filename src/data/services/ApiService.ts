@@ -3,7 +3,7 @@ const API_BASE_URL = process.env.API_BASE_URL;
 export class ApiService {
   private baseUrl: string;
 
-  constructor(baseUrl: string = API_BASE_URL ?? "") {
+  constructor(baseUrl: string = API_BASE_URL || "") {
     this.baseUrl = baseUrl;
   }
 

@@ -2,21 +2,16 @@ import {
   Project,
   ProjectRepository as IProjectRepository,
 } from "../../domain/entities/Project";
-import { ProjectApiClient } from "../services/ProjectApiClient";
+import { projectApiClient } from "../services/ProjectApiClient";
 
 export class ProjectRepository implements IProjectRepository {
-  private apiClient: ProjectApiClient;
   private projects: Project[] = [];
   private isLoaded = false;
-
-  constructor() {
-    this.apiClient = new ProjectApiClient();
-  }
 
   private async ensureProjectsLoaded(): Promise<void> {
     if (!this.isLoaded) {
       try {
-        this.projects = await this.apiClient.getAllProjects();
+        this.projects = await projectApiClient.getAllProjects();
         this.isLoaded = true;
       } catch (error) {
         console.error(

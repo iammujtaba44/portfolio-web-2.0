@@ -1,4 +1,5 @@
 import { Project } from "../../domain/entities/Project";
+import { apiService, ApiService } from "./ApiService";
 
 export interface ProjectApiResponse {
   success: boolean;
@@ -6,25 +7,23 @@ export interface ProjectApiResponse {
 }
 
 export class ProjectApiClient {
-  private baseUrl: string;
+  private apiService: ApiService;
 
-  constructor(baseUrl: string = "") {
-    this.baseUrl = baseUrl;
+  constructor(apiService: ApiService) {
+    this.apiService = apiService;
   }
 
   async getAllProjects(): Promise<Project[]> {
     try {
-      // Use relative URL for local API route
-      const apiUrl = this.baseUrl
-        ? `${this.baseUrl}/api/projects`
-        : "/api/projects";
-      const response = await fetch(apiUrl);
+      const response = await this.apiService.get<ProjectApiResponse>(
+        "/projects"
+      );
 
-      if (!response.ok) {
-        throw new Error(`Failed to fetch projects: ${response.statusText}`);
+      if (!response.success) {
+        throw new Error(`HTTP error! status: ${response.success}`);
       }
 
-      const result: ProjectApiResponse = await response.json();
+      const result: ProjectApiResponse = response;
 
       if (!result.success) {
         throw new Error("API returned unsuccessful response");
@@ -32,8 +31,10 @@ export class ProjectApiClient {
 
       return result.data;
     } catch (error) {
-      console.error("Error fetching projects:", error);
+      console.error("API Error for /api/projects:", error);
       throw error;
     }
   }
 }
+
+export const projectApiClient = new ProjectApiClient(apiService);

@@ -133,7 +133,7 @@ The portfolio integrates with external APIs while maintaining Clean Architecture
 
 ### Experience API Integration
 
-- **API Endpoint**: `https://api.mujtaba.cc/api/v1/experiences`
+- **API Endpoint**: `BASE_URL/experiences`
 - **Data Flow**: API → ApiService → ExperienceApiClient → ExperienceMapper → ExperienceRepository → useExperience hook → ExperienceSection
 
 ### Architecture Components:

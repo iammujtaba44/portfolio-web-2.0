@@ -9,7 +9,7 @@ export class AppConfigApiClient {
   }
 
   async getAppConfigs(): Promise<AppConfigsResponse> {
-    return this.apiService.get<AppConfigsResponse>("/api/app-configs");
+    return this.apiService.get<AppConfigsResponse>("/app-configs");
   }
 
   async getStats(): Promise<Stats | null> {

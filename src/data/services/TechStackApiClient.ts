@@ -1,26 +1,16 @@
 import { ApiTechStackResponse } from "../../domain/entities/Skill";
+import { ApiService, apiService } from "./ApiService";
 
 export class TechStackApiClient {
+  private apiService: ApiService;
+
+  constructor(apiService: ApiService) {
+    this.apiService = apiService;
+  }
+
   async getTechStack(): Promise<ApiTechStackResponse> {
-    try {
-      const response = await fetch("/api/tech-stack", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("API Error for /api/tech-stack:", error);
-      throw error;
-    }
+    return this.apiService.get<ApiTechStackResponse>("/tech-stack");
   }
 }
 
-export const techStackApiClient = new TechStackApiClient();
+export const techStackApiClient = new TechStackApiClient(apiService);
