@@ -1,9 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, ExternalLink, Smartphone, Globe } from "lucide-react";
 import { useProjects } from "../../hooks/useProjects";
-import { AppLink } from "../../domain/entities/Project";
 import {
   getAppLinkIcon,
   getAppLinkLabel,
