@@ -2,6 +2,7 @@
 
 import { useAppConfigs } from "@/hooks/useAppConfigs";
 import { motion } from "framer-motion";
+import React from "react";
 
 export default function AboutSection() {
   const { bio } = useAppConfigs();
@@ -20,7 +21,13 @@ export default function AboutSection() {
               About Me
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              {bio?.about}
+              {bio?.about.split("|").map((line, index) => (
+                <React.Fragment key={index}>
+                  {line}
+                  <br />
+                  <br />
+                </React.Fragment>
+              ))}
             </p>
           </div>
           <div className="relative">

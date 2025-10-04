@@ -1,11 +1,45 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink, Smartphone, Globe } from "lucide-react";
 import { useProjects } from "../../hooks/useProjects";
+import { AppLink } from "../../domain/entities/Project";
+import {
+  getAppLinkIcon,
+  getAppLinkLabel,
+} from "../components/projects/ProjectsCommonComponents";
 
 export default function ProjectsSection() {
-  const { featuredProjects } = useProjects();
+  const { featuredProjects, loading, error } = useProjects();
+
+  if (loading) {
+    return (
+      <section id="projects" className="py-20 bg-white dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600 dark:text-gray-300">
+              Loading projects...
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section id="projects" className="py-20 bg-white dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-red-600 dark:text-red-400">
+              Error loading projects: {error}
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="projects" className="py-20 bg-white dark:bg-gray-800">
@@ -34,37 +68,41 @@ export default function ProjectsSection() {
               whileHover={{ scale: 1.05, y: -10 }}
               className="glass rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 group"
             >
-              <h3 className="text-xl font-heading font-bold mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                {project.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
+              <div className="mb-4">
+                <img
+                  src={project.imageUrl}
+                  alt={project.projectName}
+                  className="w-full h-48 object-cover rounded-lg mb-4"
+                />
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-xl font-heading font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    {project.projectName}
+                  </h3>
+                  <span className="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-md text-xs">
+                    {project.projectTypeDisplayName}
+                  </span>
+                </div>
+                <p className="text-md text-gray-500 dark:text-gray-400 mb-2 font-bold tracking-wide">
+                  {project.companyName}
+                </p>
+              </div>
+
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
                 {project.description}
               </p>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {project.tech.map((tech, techIndex) => (
-                  <span
-                    key={techIndex}
-                    className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
+              <div className="flex flex-wrap gap-2">
+                {project.appLinks.map((link, linkIndex) => (
+                  <a
+                    key={linkIndex}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center px-3 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg text-sm transition-colors"
                   >
-                    {tech}
-                  </span>
+                    {getAppLinkIcon(link.type)}
+                    <span className="ml-2">{getAppLinkLabel(link.type)}</span>
+                  </a>
                 ))}
-              </div>
-              <div className="flex space-x-4">
-                <a
-                  href={project.github}
-                  className="flex items-center text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  <Github className="h-4 w-4 mr-2" />
-                  Code
-                </a>
-                <a
-                  href={project.demo}
-                  className="flex items-center text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  <ExternalLink className="h-4 w-4 mr-2" />
-                  Demo
-                </a>
               </div>
             </motion.div>
           ))}
