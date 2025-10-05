@@ -25,10 +25,10 @@ export const metadata: Metadata = {
     "Senior Flutter Engineer & Builder of Modern Apps. Passionate about creating beautiful, performant mobile applications.",
   icons: {
     icon: [
-      { url: "/icon.png", type: "image/svg+xml" },
-      { url: "/icon.png", sizes: "16x16", type: "image/x-icon" },
+      { url: "/icon.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "16x16", type: "image/x-icon" },
     ],
-    apple: [{ url: "/icon.png", sizes: "180x180", type: "image/svg+xml" }],
+    apple: [{ url: "/icon.png", sizes: "180x180", type: "image/png" }],
   },
 };
 

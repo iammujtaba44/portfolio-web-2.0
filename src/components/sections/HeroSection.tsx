@@ -9,12 +9,26 @@ import {
   Users,
   Briefcase,
   Code,
+  Facebook,
+  Instagram,
+  MessageCircle,
 } from "lucide-react";
 import { useAppConfigs } from "@/hooks/useAppConfigs";
+import { useContact } from "@/hooks/useContact";
 import Image from "next/image";
+
+const iconMap = {
+  Github,
+  Linkedin,
+  Youtube,
+  Facebook,
+  Instagram,
+  MessageCircle,
+};
 
 export default function HeroSection() {
   const { stats, bio, loading, error } = useAppConfigs();
+  const { contact } = useContact();
 
   return (
     <section className="min-h-screen flex items-center justify-start relative overflow-hidden pt-20">
@@ -155,23 +169,111 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4 justify-start items-start pt-8"
+              className="flex flex-col sm:flex-row gap-6 justify-start items-start pt-8"
             >
+              {/* Primary Button - Modern Gradient */}
               <motion.a
                 href="#projects"
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl border border-blue-600/20"
+                whileHover={{
+                  scale: 1.05,
+                  y: -3,
+                  boxShadow: "0 20px 40px rgba(59, 130, 246, 0.4)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative px-12 py-5 overflow-hidden rounded-2xl font-semibold text-white transition-all duration-500 ease-out"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #2563eb 0%, #0ea5e9 50%, #14b8a6 100%)",
+                  boxShadow: "0 10px 30px rgba(37, 99, 235, 0.3)",
+                }}
               >
-                View Projects
+                {/* Animated background overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-700 via-sky-500 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                {/* Shimmer effect */}
+                <div className="absolute inset-0 -top-2 -left-2 w-[calc(100%+1rem)] h-[calc(100%+1rem)] bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out"></div>
+
+                {/* Button content */}
+                <span className="relative z-10 flex items-center gap-2">
+                  View Projects
+                  <motion.div
+                    className="w-5 h-5"
+                    whileHover={{ rotate: 45 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      className="w-full h-full"
+                    >
+                      <path
+                        d="M7 17L17 7M17 7H7M17 7V17"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </motion.div>
+                </span>
               </motion.a>
+
+              {/* Secondary Button - Glassmorphism Gradient Border */}
               <motion.a
                 href="#contact"
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-10 py-4 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-blue-600 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg font-semibold transition-all duration-300 hover:bg-blue-50 dark:hover:bg-blue-900/10"
+                whileHover={{
+                  scale: 1.05,
+                  y: -3,
+                  boxShadow: "0 20px 40px rgba(37, 99, 235, 0.3)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative px-12 py-5 rounded-2xl font-semibold transition-all duration-500 ease-out overflow-hidden"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)",
+                  backdropFilter: "blur(10px)",
+                  border: "2px solid transparent",
+                  backgroundClip: "padding-box",
+                }}
               >
-                Get in Touch
+                {/* Animated gradient border */}
+                <div
+                  className="absolute inset-0 rounded-2xl p-[2px]"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #2563eb, #0ea5e9, #14b8a6, #06b6d4) border-box",
+                    WebkitMask:
+                      "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    WebkitMaskComposite: "xor",
+                    maskComposite: "exclude",
+                  }}
+                >
+                  <div className="w-full h-full rounded-2xl bg-gradient-to-r from-blue-500/20 via-sky-500/20 to-teal-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+
+                {/* Button content */}
+                <span className="relative z-10 flex items-center gap-2 text-gray-700 dark:text-gray-300 group-hover:text-white transition-colors duration-300">
+                  Get in Touch
+                  <motion.div
+                    className="w-5 h-5"
+                    whileHover={{ rotate: 12 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      className="w-full h-full"
+                    >
+                      <path
+                        d="M22 12h-4l-3 9L9 3l-3 9H2"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </motion.div>
+                </span>
               </motion.a>
             </motion.div>
 
@@ -181,30 +283,25 @@ export default function HeroSection() {
               transition={{ duration: 0.8, delay: 1.0 }}
               className="flex justify-start space-x-4 pt-8"
             >
-              <motion.a
-                href={bio?.repositories || "https://github.com/mujtaba"}
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600"
-              >
-                <Github className="h-6 w-6 text-gray-700 dark:text-gray-300" />
-              </motion.a>
-              <motion.a
-                href="https://linkedin.com/in/mujtaba"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600"
-              >
-                <Linkedin className="h-6 w-6 text-gray-700 dark:text-gray-300" />
-              </motion.a>
-              <motion.a
-                href="https://youtube.com/@mujtaba"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600"
-              >
-                <Youtube className="h-6 w-6 text-gray-700 dark:text-gray-300" />
-              </motion.a>
+              {contact.socialLinks.map((link) => {
+                const IconComponent =
+                  iconMap[link.icon as keyof typeof iconMap];
+                return (
+                  <motion.a
+                    key={link.platform}
+                    href={link.url}
+                    target={link.platform === "Topmate" ? "_blank" : "_self"}
+                    rel={
+                      link.platform === "Topmate" ? "noopener noreferrer" : ""
+                    }
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600"
+                  >
+                    <IconComponent className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+                  </motion.a>
+                );
+              })}
             </motion.div>
           </motion.div>
 
@@ -223,10 +320,10 @@ export default function HeroSection() {
 
                 {/* Profile Image */}
                 <Image
-                  src="/profile.png"
-                  alt="Muhammad Mujtaba - Senior Flutter Engineer"
+                  src="/profile-2.png"
+                  alt="MJ - Full-stack developer"
                   fill
-                  className="object-cover object-center"
+                  className="object-contain object-center"
                 />
               </div>
 
