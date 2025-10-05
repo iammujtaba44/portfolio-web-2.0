@@ -20,9 +20,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Muhammad Mujtaba - Senior Flutter Engineer",
+  title: "Muhammad Mujtaba - Senior Full-stack Engineer",
   description:
-    "Senior Flutter Engineer & Builder of Modern Apps. Passionate about creating beautiful, performant mobile applications.",
+    "Full-stack developer specializing in mobile apps, frontend & backend solutions.",
   icons: {
     icon: [
       { url: "/icon.png", type: "image/png" },
