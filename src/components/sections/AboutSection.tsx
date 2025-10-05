@@ -150,7 +150,7 @@ export default function AboutSection() {
                 className="group px-8 py-4 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-xl font-semibold transition-all duration-300 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white"
               >
                 <span className="flex items-center gap-2">
-                  Let's Connect
+                  Let&apos;s Connect
                   <motion.div
                     whileHover={{ rotate: 12 }}
                     transition={{ duration: 0.2 }}
