@@ -23,7 +23,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Muhammad Mujtaba - Senior Full-stack Engineer",
   description:
-    "Full-stack developer specializing in mobile apps, frontend & backend solutions.",
+    "Full-stack developer specializing in mobile apps, frontend & backend solutions with a passion for building innovative solutions.",
   icons: {
     icon: [
       { url: "/icon.png", type: "image/png" },
