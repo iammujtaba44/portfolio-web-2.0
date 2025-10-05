@@ -102,7 +102,7 @@ export default function ContactSection() {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50">
+                {/* <div className="flex items-center space-x-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50">
                   <MapPin className="h-6 w-6 text-blue-600 dark:text-blue-400 flex-shrink-0" />
                   <div>
                     <p className="font-medium">Location</p>
@@ -110,7 +110,7 @@ export default function ContactSection() {
                       {contact.info.location}
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -178,7 +178,7 @@ export default function ContactSection() {
                   placeholder="your.email@example.com"
                 />
               </div>
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Subject
                 </label>
@@ -189,7 +189,7 @@ export default function ContactSection() {
                   <option>App Security</option>
                   <option>Project Collaboration</option>
                 </select>
-              </div>
+              </div> */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Message
@@ -202,6 +202,7 @@ export default function ContactSection() {
               </div>
               <motion.button
                 type="submit"
+                onClick={() => {}}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="w-full px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
