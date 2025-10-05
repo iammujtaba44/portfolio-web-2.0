@@ -71,6 +71,11 @@ export default function Navigation() {
       action: () => scrollToSection("projects"),
     },
     {
+      id: "skills",
+      label: "Skills",
+      action: () => scrollToSection("skills"),
+    },
+    {
       id: "contact",
       label: "Contact",
       action: () => scrollToSection("contact"),
