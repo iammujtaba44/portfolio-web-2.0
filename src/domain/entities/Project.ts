@@ -1,5 +1,10 @@
 export interface AppLink {
-  type: "mobile_app_app_store" | "mobile_app_play_store" | "web_app" | "github";
+  type:
+    | "mobile_app_app_store"
+    | "mobile_app_play_store"
+    | "web_app"
+    | "github"
+    | "api";
   url: string;
 }
 
