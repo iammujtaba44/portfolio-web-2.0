@@ -1,216 +1,188 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import ThemeToggle from "../ThemeToggle";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const { scrollYProgress } = useScroll();
+  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setIsMenuOpen(false);
   };
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
     setIsMenuOpen(false);
   };
 
-  // Handle scroll events for active section and navbar background
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 50);
+      setIsScrolled(scrollY > 40);
 
-      // Determine active section based on scroll position
-      const sections = ["home", "about", "experience", "projects", "contact"];
-      const currentSection = sections.find((section) => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
+      const sections = ["home", "about", "experience", "projects", "skills", "contact"];
+      const current = sections.find((id) => {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
           return rect.top <= 100 && rect.bottom >= 100;
         }
         return false;
       });
 
-      if (currentSection) {
-        setActiveSection(currentSection);
-      } else if (scrollY < 100) {
-        setActiveSection("home");
-      }
+      if (current) setActiveSection(current);
+      else if (scrollY < 100) setActiveSection("home");
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navItems = [
-    { id: "home", label: "Home", action: scrollToTop },
-    { id: "about", label: "About", action: () => scrollToSection("about") },
-    {
-      id: "experience",
-      label: "Experience",
-      action: () => scrollToSection("experience"),
-    },
-    {
-      id: "projects",
-      label: "Projects",
-      action: () => scrollToSection("projects"),
-    },
-    {
-      id: "skills",
-      label: "Skills",
-      action: () => scrollToSection("skills"),
-    },
-    {
-      id: "contact",
-      label: "Contact",
-      action: () => scrollToSection("contact"),
-    },
+    { id: "home",       label: "Home",       action: scrollToTop },
+    { id: "about",      label: "About",      action: () => scrollToSection("about") },
+    { id: "experience", label: "Experience", action: () => scrollToSection("experience") },
+    { id: "projects",   label: "Projects",   action: () => scrollToSection("projects") },
+    { id: "skills",     label: "Skills",     action: () => scrollToSection("skills") },
+    { id: "contact",    label: "Contact",    action: () => scrollToSection("contact") },
   ];
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-700/50 shadow-lg shadow-gray-900/5"
-          : "bg-white/70 dark:bg-gray-900/70 backdrop-blur-md border-b border-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 lg:h-18">
-          {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex items-center space-x-3"
-          >
+    <>
+      <motion.nav
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-white/88 dark:bg-gray-950/88 backdrop-blur-2xl border-b border-gray-200/50 dark:border-white/6 shadow-lg shadow-black/5 dark:shadow-black/30"
+            : "bg-white/60 dark:bg-gray-950/60 backdrop-blur-md border-b border-transparent"
+        }`}
+      >
+        {/* Scroll progress bar */}
+        <motion.div
+          className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-blue-600 via-sky-400 to-teal-500 z-60 origin-left"
+          style={{ width: progressWidth }}
+        />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+
+            {/* Logo */}
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative"
+              initial={{ opacity: 0, x: -16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex items-center"
             >
-              <Image
-                src="/icon.png"
-                alt="Muhammad Mujtaba"
-                width={40}
-                height={40}
-                className="rounded-full cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25"
+              <motion.div
+                whileTap={{ scale: 0.92 }}
+                className="relative cursor-pointer"
                 onClick={scrollToTop}
-              />
-              <motion.div
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 opacity-0 hover:opacity-20 transition-opacity duration-300"
-                whileHover={{ scale: 1.1 }}
-              />
-            </motion.div>
-          </motion.div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
-            {navItems.map((item, index) => (
-              <motion.button
-                key={item.id}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + index * 0.1 }}
-                onClick={item.action}
-                className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                  activeSection === item.id
-                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                    : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800/50"
-                }`}
               >
-                {item.label}
-                {activeSection === item.id && (
-                  <motion.div
-                    layoutId="activeSection"
-                    className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500/10 to-teal-500/10 border border-blue-200/50 dark:border-blue-700/50"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  />
-                )}
-              </motion.button>
-            ))}
-            <div className="ml-4 pl-4 border-l border-gray-200 dark:border-gray-700">
-              {/* <ThemeToggle /> */}
-            </div>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center space-x-3">
-            {/* <ThemeToggle /> */}
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Toggle menu"
-            >
-              <motion.div
-                animate={{ rotate: isMenuOpen ? 45 : 0 }}
-                className="w-6 h-6 flex flex-col justify-center space-y-1"
-              >
-                <motion.span
-                  animate={{
-                    rotate: isMenuOpen ? 45 : 0,
-                    y: isMenuOpen ? 6 : 0,
-                  }}
-                  className="block w-full h-0.5 bg-current"
+                <Image
+                  src="/icon.png"
+                  alt="MJ"
+                  width={38}
+                  height={38}
+                  className="rounded-full shadow-md ring-2 ring-blue-500/20"
                 />
-                <motion.span
-                  animate={{ opacity: isMenuOpen ? 0 : 1 }}
-                  className="block w-full h-0.5 bg-current"
-                />
-                <motion.span
-                  animate={{
-                    rotate: isMenuOpen ? -45 : 0,
-                    y: isMenuOpen ? -6 : 0,
-                  }}
-                  className="block w-full h-0.5 bg-current"
-                />
+                {/* Subtle glow on hover */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 opacity-0 hover:opacity-20 transition-opacity duration-300 blur-sm scale-110"></div>
               </motion.div>
-            </motion.button>
+            </motion.div>
+
+            {/* Desktop nav */}
+            <div className="hidden lg:flex items-center gap-1">
+              {navItems.map((item, index) => (
+                <motion.button
+                  key={item.id}
+                  initial={{ opacity: 0, y: -12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.25 + index * 0.07 }}
+                  onClick={item.action}
+                  className={`relative px-4 py-2 rounded-xl text-sm font-semibold transition-colors duration-200 ${
+                    activeSection === item.id
+                      ? "text-blue-600 dark:text-blue-400"
+                      : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                  }`}
+                >
+                  {activeSection === item.id && (
+                    <motion.div
+                      layoutId="nav-pill"
+                      className="absolute inset-0 rounded-xl bg-blue-50 dark:bg-blue-900/25 border border-blue-100 dark:border-blue-700/30"
+                      initial={false}
+                      transition={{ type: "spring", stiffness: 480, damping: 32 }}
+                    />
+                  )}
+                  <span className="relative z-10">{item.label}</span>
+                </motion.button>
+              ))}
+            </div>
+
+            {/* Mobile hamburger */}
+            <div className="lg:hidden">
+              <motion.button
+                whileTap={{ scale: 0.92 }}
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle menu"
+                className="p-2 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/8 transition-colors duration-200"
+              >
+                <div className="w-5 h-4 flex flex-col justify-between">
+                  <motion.span
+                    animate={{ rotate: isMenuOpen ? 45 : 0, y: isMenuOpen ? 7 : 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="block w-full h-0.5 bg-current rounded-full"
+                  />
+                  <motion.span
+                    animate={{ opacity: isMenuOpen ? 0 : 1, scaleX: isMenuOpen ? 0 : 1 }}
+                    transition={{ duration: 0.2 }}
+                    className="block w-full h-0.5 bg-current rounded-full"
+                  />
+                  <motion.span
+                    animate={{ rotate: isMenuOpen ? -45 : 0, y: isMenuOpen ? -7 : 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="block w-full h-0.5 bg-current rounded-full"
+                  />
+                </div>
+              </motion.button>
+            </div>
+
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile dropdown */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="lg:hidden overflow-hidden"
+              transition={{ duration: 0.28, ease: "easeInOut" }}
+              className="lg:hidden overflow-hidden border-t border-gray-100 dark:border-white/6"
             >
-              <div className="py-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
+              <div className="px-4 py-3 space-y-1 bg-white/95 dark:bg-gray-950/95 backdrop-blur-xl">
                 {navItems.map((item, index) => (
                   <motion.button
                     key={item.id}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -14 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.06, duration: 0.25 }}
                     onClick={item.action}
-                    className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
+                    className={`w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-colors duration-200 ${
                       activeSection === item.id
                         ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                        : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                        : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/6"
                     }`}
                   >
                     {item.label}
@@ -220,7 +192,7 @@ export default function Navigation() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
-    </motion.nav>
+      </motion.nav>
+    </>
   );
 }

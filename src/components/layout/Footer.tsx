@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import {
   Github,
   Linkedin,
@@ -7,6 +8,7 @@ import {
   Facebook,
   Instagram,
   MessageCircle,
+  Heart,
 } from "lucide-react";
 import { useContact } from "../../hooks/useContact";
 
@@ -23,33 +25,58 @@ export default function Footer() {
   const { contact } = useContact();
 
   return (
-    <footer className="bg-gray-900 dark:bg-black text-gray-400 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <p className="text-lg font-heading font-bold text-white mb-4">
-            Muhammad Mujtaba
-          </p>
-          <p className="mb-6">
-            Full-stack developer specializing in mobile apps, frontend & backend
-            solutions
-          </p>
-          <div className="flex justify-center space-x-6 mb-6">
-            {contact.socialLinks.map((link) => {
+    <footer className="relative bg-gray-950 dark:bg-black overflow-hidden">
+      {/* Subtle top gradient */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(37,99,235,0.08),transparent_60%)]"></div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        <div className="flex flex-col items-center gap-6">
+
+          {/* Name */}
+          <div className="text-center">
+            <p className="text-lg font-heading font-black gradient-text mb-1">
+              Muhammad Mujtaba
+            </p>
+            <p className="text-xs text-gray-500 font-medium">
+              Technical Lead · Full-Stack Developer
+            </p>
+          </div>
+
+          {/* Social links */}
+          <div className="flex items-center gap-3 flex-wrap justify-center">
+            {contact.socialLinks.map((link, i) => {
               const IconComponent = iconMap[link.icon as keyof typeof iconMap];
               return (
-                <a
+                <motion.a
                   key={link.platform}
                   href={link.url}
                   target={link.platform === "Topmate" ? "_blank" : "_self"}
                   rel={link.platform === "Topmate" ? "noopener noreferrer" : ""}
-                  className="hover:text-white transition-colors"
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: i * 0.06 }}
+                  viewport={{ once: true }}
+                  whileTap={{ scale: 0.9 }}
+                  aria-label={link.platform}
+                  className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/8 hover:border-white/20 text-gray-500 hover:text-white transition-all duration-200"
                 >
-                  <IconComponent className="h-6 w-6" />
-                </a>
+                  <IconComponent className="w-4 h-4" />
+                </motion.a>
               );
             })}
           </div>
-          <p className="text-sm">&copy; 2024 MJ. All rights reserved.</p>
+
+          {/* Divider */}
+          <div className="w-16 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
+
+          {/* Copyright */}
+          <p className="text-xs text-gray-600 flex items-center gap-1.5">
+            &copy; {new Date().getFullYear()} MJ. Built with
+            <Heart className="w-3 h-3 text-red-500 fill-red-500" />
+            using Next.js & Framer Motion
+          </p>
+
         </div>
       </div>
     </footer>

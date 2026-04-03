@@ -2,17 +2,8 @@
 
 import { useAppConfigs } from "@/hooks/useAppConfigs";
 import { motion } from "framer-motion";
-import React from "react";
-import {
-  Code,
-  Heart,
-  Coffee,
-  Lightbulb,
-  Target,
-  Users,
-  Award,
-  Zap,
-} from "lucide-react";
+import { Heart, Zap, Coffee } from "lucide-react";
+import Image from "next/image";
 import AboutPointsComponent from "../components/about/AboutPointsComponent";
 
 export default function AboutSection() {
@@ -22,193 +13,167 @@ export default function AboutSection() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-      },
-    },
-  };
-
-  const floatingVariants = {
-    animate: {
-      y: [-10, 10, -10],
-      transition: {
-        duration: 6,
-        repeat: Infinity,
-      },
-    },
+    hidden: { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
   };
 
   return (
     <section id="about" className="relative py-24 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white to-teal-50/50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(20,184,166,0.1),transparent_50%)]"></div>
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/60 via-white to-teal-50/30 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(59,130,246,0.08),transparent_55%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_80%,rgba(20,184,166,0.08),transparent_55%)]"></div>
+      <div className="absolute inset-0 bg-grid-pattern opacity-50"></div>
 
-      {/* Floating Orbs */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-blue-400/20 rounded-full blur-xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-40 h-40 bg-teal-400/20 rounded-full blur-xl animate-pulse delay-1000"></div>
-      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-purple-400/20 rounded-full blur-xl animate-pulse delay-500"></div>
+      {/* Ambient orbs */}
+      <div className="absolute top-16 left-8 w-72 h-72 bg-blue-400/15 dark:bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-16 right-8 w-64 h-64 bg-teal-400/15 dark:bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
+          viewport={{ once: true, margin: "-80px" }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
         >
-          {/* Left Content */}
-          <motion.div variants={itemVariants} className="space-y-8">
-            {/* Section Header */}
-            <div className="space-y-4">
-              <motion.div
-                variants={itemVariants}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full text-sm font-medium text-blue-700 dark:text-blue-300"
-              >
-                <Heart className="w-4 h-4" />
-                About Me
-              </motion.div>
 
-              <motion.h2
-                variants={itemVariants}
-                className="text-5xl lg:text-6xl font-heading font-bold leading-tight"
-              >
-                <span className="gradient-text">Crafting Digital</span>
-                <br />
-                <span className="gradient-text">Experiences</span>
-              </motion.h2>
-
-              <motion.div
-                variants={itemVariants}
-                className="w-20 h-1 bg-gradient-to-r from-blue-600 to-teal-500 rounded-full"
-              />
-            </div>
-
-            {/* Bio Content */}
+          {/* ── Left: Text content ── */}
+          <motion.div variants={itemVariants} className="space-y-7">
+            {/* Label */}
             <motion.div
               variants={itemVariants}
-              className="space-y-6 text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full text-sm font-semibold text-blue-700 dark:text-blue-300 border border-blue-200/60 dark:border-blue-700/40"
+            >
+              <Heart className="w-4 h-4" />
+              About Me
+            </motion.div>
+
+            {/* Heading */}
+            <motion.h2
+              variants={itemVariants}
+              className="text-4xl sm:text-5xl lg:text-6xl font-heading font-black leading-tight"
+            >
+              <span className="gradient-text">Crafting Digital</span>
+              <br />
+              <span className="gradient-text">Experiences</span>
+            </motion.h2>
+
+            <motion.div
+              variants={itemVariants}
+              className="w-16 h-1 bg-gradient-to-r from-blue-600 to-teal-500 rounded-full"
+            />
+
+            {/* Bio paragraphs */}
+            <motion.div
+              variants={itemVariants}
+              className="space-y-4"
             >
               {bio?.about.split("|").map((line, index) => (
-                <motion.p
+                <p
                   key={index}
-                  variants={itemVariants}
-                  className="relative pl-6 border-l-2 border-blue-200 dark:border-blue-800"
+                  className="text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed pl-4 border-l-2 border-blue-200 dark:border-blue-700/50"
                 >
                   {line}
-                </motion.p>
+                </p>
               ))}
             </motion.div>
 
-            {/* Key Points Grid */}
+            {/* Points grid */}
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-8"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
             >
               <AboutPointsComponent />
             </motion.div>
 
-            {/* Call to Action */}
+            {/* CTAs */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4 pt-8"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
             >
               <motion.a
                 href="#projects"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25"
+                whileTap={{ scale: 0.97 }}
+                className="group relative inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl font-semibold text-white text-sm overflow-hidden shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-shadow duration-300"
+                style={{
+                  background: "linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #14b8a6 100%)",
+                }}
               >
-                <span className="relative z-10 flex items-center gap-2">
-                  View My Work
-                  <motion.div
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Zap className="w-5 h-5" />
-                  </motion.div>
-                </span>
+                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 pointer-events-none"></span>
+                <span className="relative z-10">View My Work</span>
+                <Zap className="relative z-10 w-4 h-4" />
               </motion.a>
 
               <motion.a
                 href="#contact"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="group px-8 py-4 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-xl font-semibold transition-all duration-300 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white"
+                whileTap={{ scale: 0.97 }}
+                className="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl font-semibold text-sm border-2 border-transparent transition-all duration-300"
+                style={{
+                  background: "linear-gradient(white, white) padding-box, linear-gradient(135deg, #2563eb, #14b8a6) border-box",
+                }}
               >
-                <span className="flex items-center gap-2">
-                  Let&apos;s Connect
-                  <motion.div
-                    whileHover={{ rotate: 12 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Coffee className="w-5 h-5" />
-                  </motion.div>
-                </span>
+                <span className="gradient-text font-semibold">Let&apos;s Connect</span>
+                <Coffee className="w-4 h-4 text-teal-500" />
               </motion.a>
             </motion.div>
           </motion.div>
 
-          {/* Right Visual */}
+          {/* ── Right: Visual element ── */}
           <motion.div
             variants={itemVariants}
             className="relative flex justify-center lg:justify-end"
           >
-            <div className="relative">
-              {/* Main Avatar Container */}
-              <motion.div
-                variants={floatingVariants}
-                animate="animate"
-                className="relative w-80 h-80 lg:w-96 lg:h-96"
-              >
-                {/* Outer Glow Ring */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-teal-500 rounded-full p-1">
-                  <div className="w-full h-full bg-white dark:bg-gray-800 rounded-full flex items-center justify-center relative overflow-hidden">
-                    {/* Inner Gradient Background */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-teal-50 dark:from-gray-800 dark:to-gray-900"></div>
+            <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
 
-                    {/* Avatar Content */}
-                    <div className="relative z-10 text-center">
-                      <div className="text-8xl lg:text-9xl font-bold gradient-text mb-4">
-                        MJ
-                      </div>
-                      <div className="flex items-center justify-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        <Award className="w-4 h-4" />
-                        <span>Senior Developer</span>
-                      </div>
-                    </div>
+              {/* Outer spinning ring */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-teal-500 animate-spin-slow opacity-30 blur-md scale-110 pointer-events-none"></div>
 
-                    {/* Floating Elements */}
-                    <div className="absolute top-4 right-4 w-8 h-8 bg-blue-500/20 rounded-full blur-sm"></div>
-                    <div className="absolute bottom-4 left-4 w-6 h-6 bg-teal-500/20 rounded-full blur-sm"></div>
-                    <div className="absolute top-1/2 left-2 w-4 h-4 bg-purple-500/20 rounded-full blur-sm"></div>
-                  </div>
+              {/* Gradient border ring */}
+              <div className="absolute inset-0 rounded-full p-[3px] bg-gradient-to-br from-blue-500 via-purple-500 to-teal-500">
+                <div className="w-full h-full rounded-full bg-white dark:bg-gray-900 flex items-center justify-center relative overflow-hidden">
+                  {/* Inner soft gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-teal-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800"></div>
+
+                  {/* Profile image filling the circle */}
+                  <Image
+                    src="/profile-2.png"
+                    alt="Muhammad Mujtaba"
+                    fill
+                    className="object-cover object-top"
+                  />
                 </div>
+              </div>
 
-                {/* Decorative Elements */}
-                <div className="absolute -top-4 -right-4 w-16 h-16 border-2 border-blue-300/30 rounded-lg rotate-12 animate-pulse"></div>
-                <div className="absolute -bottom-4 -left-4 w-12 h-12 border-2 border-teal-300/30 rounded-full animate-pulse delay-1000"></div>
-                <div className="absolute top-1/2 -left-8 w-8 h-8 border-2 border-purple-300/30 rounded-lg rotate-45 animate-pulse delay-500"></div>
+              {/* Floating accent badges */}
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-3 -right-3 sm:-top-5 sm:-right-5 px-3 py-2 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 flex items-center gap-2"
+              >
+                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                <span className="text-[10px] sm:text-xs font-bold text-gray-700 dark:text-gray-300 whitespace-nowrap">Available</span>
               </motion.div>
 
-              {/* Background Decorative Circles */}
-              <div className="absolute -z-10 top-10 -right-10 w-32 h-32 bg-blue-400/10 rounded-full blur-2xl"></div>
-              <div className="absolute -z-10 bottom-10 -left-10 w-40 h-40 bg-teal-400/10 rounded-full blur-2xl"></div>
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                className="absolute -bottom-3 -left-3 sm:-bottom-5 sm:-left-5 px-3 py-2 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700"
+              >
+                <span className="text-[10px] sm:text-xs font-bold gradient-text whitespace-nowrap">Flutter · React · NestJS</span>
+              </motion.div>
+
+              {/* Decorative small shapes */}
+              <div className="absolute top-6 -left-6 sm:top-8 sm:-left-8 w-10 h-10 border-2 border-blue-300/30 dark:border-blue-600/20 rounded-lg rotate-12"></div>
+              <div className="absolute bottom-6 -right-6 sm:bottom-8 sm:-right-8 w-8 h-8 border-2 border-teal-300/30 dark:border-teal-600/20 rounded-full"></div>
             </div>
           </motion.div>
+
         </motion.div>
       </div>
     </section>
