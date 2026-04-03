@@ -10,6 +10,7 @@ import {
   MessageCircle,
   ArrowUpRight,
 } from "lucide-react";
+import ProductHuntIcon from "@/components/icons/ProductHuntIcon";
 import { useAppConfigs } from "@/hooks/useAppConfigs";
 import { useContact } from "@/hooks/useContact";
 import { useEffect, useState } from "react";
@@ -21,6 +22,7 @@ const iconMap = {
   Facebook,
   Instagram,
   MessageCircle,
+  ProductHunt: ProductHuntIcon,
 };
 
 const ROLES = [
@@ -69,7 +71,6 @@ export default function HeroSection() {
       className="min-h-screen flex flex-col justify-center pt-16 bg-white dark:bg-[#0a0a0a] overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full py-16">
-
         {/* ── Top row: label + availability ── */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -116,7 +117,11 @@ export default function HeroSection() {
             <motion.h1
               initial={{ y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{
+                duration: 0.8,
+                delay: 0.08,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
               className="font-bold leading-[0.92] tracking-tight text-gray-900 dark:text-white"
               style={{ fontSize: "clamp(56px, 10vw, 140px)" }}
             >
@@ -131,7 +136,8 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-base text-gray-500 dark:text-gray-400 max-w-xs leading-relaxed lg:mb-2 lg:text-right"
           >
-            I build things that ship — mobile apps, APIs, and everything in between.
+            I build things that ship — mobile apps, APIs, and everything in
+            between.
           </motion.p>
         </div>
 
@@ -145,7 +151,6 @@ export default function HeroSection() {
 
         {/* ── Bottom row: stats + CTAs + socials ── */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-
           {/* Stats */}
           {!loading && stats && (
             <motion.div
@@ -182,7 +187,8 @@ export default function HeroSection() {
             {/* Socials */}
             <div className="flex gap-2">
               {contact.socialLinks.map((link) => {
-                const IconComponent = iconMap[link.icon as keyof typeof iconMap];
+                const IconComponent =
+                  iconMap[link.icon as keyof typeof iconMap];
                 return (
                   <a
                     key={link.platform}
@@ -218,7 +224,6 @@ export default function HeroSection() {
               </a>
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>

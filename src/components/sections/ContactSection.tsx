@@ -13,6 +13,7 @@ import {
   Send,
   ArrowUpRight,
 } from "lucide-react";
+import ProductHuntIcon from "@/components/icons/ProductHuntIcon";
 import { useContact } from "../../hooks/useContact";
 
 const iconMap = {
@@ -22,6 +23,7 @@ const iconMap = {
   MessageCircle,
   Facebook,
   Instagram,
+  ProductHunt: ProductHuntIcon,
 };
 
 export default function ContactSection() {

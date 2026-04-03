@@ -6,9 +6,9 @@ import {
 export class ContactRepository implements IContactRepository {
   private contact: Contact = {
     info: {
-      email: "immujtaba96@gmail.com",
-      location: "Pakistan",
-      phone: "+92-XXX-XXXXXXX",
+      email: "i.mmujtaba96@gmail.com",
+      location: "Malta",
+      phone: "+356-XXX-XXXXXXX",
     },
     socialLinks: [
       {
@@ -35,6 +35,11 @@ export class ContactRepository implements IContactRepository {
         platform: "Topmate",
         url: "https://topmate.io/immujtaba",
         icon: "MessageCircle",
+      },
+      {
+        platform: "ProductHunt",
+        url: "https://www.producthunt.com/@muhammad_mujtaba6",
+        icon: "ProductHunt",
       },
     ],
   };

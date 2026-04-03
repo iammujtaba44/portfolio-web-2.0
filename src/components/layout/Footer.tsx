@@ -8,6 +8,7 @@ import {
   Instagram,
   MessageCircle,
 } from "lucide-react";
+import ProductHuntIcon from "@/components/icons/ProductHuntIcon";
 import { useContact } from "../../hooks/useContact";
 import MJLogo from "@/components/MJLogo";
 
@@ -18,6 +19,7 @@ const iconMap = {
   Facebook,
   Instagram,
   MessageCircle,
+  ProductHunt: ProductHuntIcon,
 };
 
 export default function Footer() {
