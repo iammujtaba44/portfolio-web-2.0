@@ -1,16 +1,15 @@
 import { Code, Lightbulb, Target, Users } from "lucide-react";
-import { motion } from "framer-motion";
 
 const aboutPoints = [
   {
     icon: Code,
     title: "Full-Stack Development",
-    description: "Passionate about creating end-to-end solutions",
+    description: "End-to-end solutions from mobile to backend",
   },
   {
     icon: Lightbulb,
     title: "Innovation Focused",
-    description: "Always exploring new technologies and methodologies",
+    description: "Always exploring new technologies and patterns",
   },
   {
     icon: Target,
@@ -20,49 +19,28 @@ const aboutPoints = [
   {
     icon: Users,
     title: "Team Collaboration",
-    description: "Thrives in collaborative environments",
+    description: "Thrives in collaborative, cross-functional teams",
   },
 ];
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-    },
-  },
-};
 
 export default function AboutPointsComponent() {
   return (
     <>
       {aboutPoints.map((point, index) => (
-        <motion.div
+        <div
           key={index}
-          variants={itemVariants}
-          whileHover={{
-            scale: 1.05,
-            y: -5,
-            transition: { duration: 0.2 },
-          }}
-          className="group p-4 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-200/50 dark:border-gray-700/50 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300"
+          className="flex items-start gap-3 p-4 rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-[#0a0a0a] hover:border-gray-300 dark:hover:border-gray-600 transition-colors duration-200"
         >
-          <div className="flex items-start gap-3">
-            <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg group-hover:bg-blue-200 dark:group-hover:bg-blue-900/50 transition-colors">
-              <point.icon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            </div>
-            <div>
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-1">
-                {point.title}
-              </h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {point.description}
-              </p>
-            </div>
+          <point.icon className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
+          <div>
+            <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-0.5">
+              {point.title}
+            </h4>
+            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+              {point.description}
+            </p>
           </div>
-        </motion.div>
+        </div>
       ))}
     </>
   );
