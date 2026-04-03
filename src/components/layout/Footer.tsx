@@ -11,6 +11,7 @@ import {
   Heart,
 } from "lucide-react";
 import { useContact } from "../../hooks/useContact";
+import MJLogo from "@/components/MJLogo";
 
 const iconMap = {
   Github,
@@ -33,14 +34,17 @@ export default function Footer() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="flex flex-col items-center gap-6">
 
-          {/* Name */}
-          <div className="text-center">
-            <p className="text-lg font-heading font-black gradient-text mb-1">
-              Muhammad Mujtaba
-            </p>
-            <p className="text-xs text-gray-500 font-medium">
-              Technical Lead · Full-Stack Developer
-            </p>
+          {/* Logo + Name */}
+          <div className="flex flex-col items-center gap-3">
+            <MJLogo size={48} className="rounded-xl shadow-lg shadow-blue-500/20" />
+            <div className="text-center">
+              <p className="text-base font-heading font-black gradient-text mb-0.5">
+                Muhammad Mujtaba
+              </p>
+              <p className="text-xs text-gray-500 font-medium">
+                Technical Lead · Full-Stack Developer
+              </p>
+            </div>
           </div>
 
           {/* Social links */}

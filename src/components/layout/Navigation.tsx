@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import Image from "next/image";
 import { useState, useEffect } from "react";
+import MJLogo from "@/components/MJLogo";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -90,13 +90,7 @@ export default function Navigation() {
                 className="relative cursor-pointer"
                 onClick={scrollToTop}
               >
-                <Image
-                  src="/icon.png"
-                  alt="MJ"
-                  width={38}
-                  height={38}
-                  className="rounded-full shadow-md ring-2 ring-blue-500/20"
-                />
+                <MJLogo size={38} className="rounded-xl shadow-md" />
                 {/* Subtle glow on hover */}
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 opacity-0 hover:opacity-20 transition-opacity duration-300 blur-sm scale-110"></div>
               </motion.div>

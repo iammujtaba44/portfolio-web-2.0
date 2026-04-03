@@ -21,15 +21,16 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Muhammad Mujtaba - Senior Full-stack Engineer",
+  title: "Muhammad Mujtaba - Technical Lead",
   description:
     "Full-stack developer specializing in mobile apps, frontend & backend solutions with a passion for building innovative solutions.",
   icons: {
     icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
       { url: "/icon.png", type: "image/png" },
       { url: "/favicon.ico", sizes: "16x16", type: "image/x-icon" },
     ],
-    apple: [{ url: "/icon.png", sizes: "180x180", type: "image/png" }],
+    apple: [{ url: "/icon.svg", sizes: "180x180", type: "image/svg+xml" }],
   },
 };
 
