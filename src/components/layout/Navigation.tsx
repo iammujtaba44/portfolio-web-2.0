@@ -30,7 +30,7 @@ export default function Navigation() {
       const scrollY = window.scrollY;
       setIsScrolled(scrollY > 40);
 
-      const sections = ["home", "about", "experience", "projects", "skills", "contact"];
+      const sections = ["home", "about", "experience", "projects", "skills", "shop", "contact"];
       const current = sections.find((id) => {
         const el = document.getElementById(id);
         if (el) {
@@ -54,6 +54,7 @@ export default function Navigation() {
     { id: "experience", label: "Experience", action: () => scrollToSection("experience") },
     { id: "projects",   label: "Projects",   action: () => scrollToSection("projects") },
     { id: "skills",     label: "Skills",     action: () => scrollToSection("skills") },
+    { id: "shop",       label: "Shop",       action: () => scrollToSection("shop") },
     { id: "contact",    label: "Contact",    action: () => scrollToSection("contact") },
   ];
 
